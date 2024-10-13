@@ -28,7 +28,9 @@ public class Flower {
         this.price = price;
     }
 
-    public Flower() {}
+    public Flower() {
+        //TO DO Auto-generated constructor stub
+    }
 
     public void setPrice(double newPrice) {
         if (newPrice < 0) {
