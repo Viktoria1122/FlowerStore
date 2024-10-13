@@ -30,11 +30,11 @@ public class Flower {
         //TODO Auto-generated constructor stub
     }
 
-    public void setPrice(double price) {
-        if (price < 0) {
-            throw new IllegalArgumentException();
+    public void setPrice(double newPrice) {
+        if (newPrice < 0) {
+            throw new IllegalArgumentException("Price cannot be negative");
         }
-        this.price = price;
+        this.price = newPrice;
     }
 
     public String getColor() {
