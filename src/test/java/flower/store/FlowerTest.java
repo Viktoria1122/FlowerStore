@@ -2,14 +2,17 @@ package flower.store;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
 
 import java.util.Random;
-
-import org.junit.jupiter.api.Assertions;
 
 public class FlowerTest {
     private static final Random RANDOM_GENERATOR = new Random();
     private static final int MAX_PRICE = 100;
+    private static final double VALID_PRICE = 10.0;
+    private static final double INVALID_PRICE = -5.0;
+    private static final int INVALID_QUANTITY = -1;
+
     private Flower flower;
 
     @BeforeEach
@@ -33,28 +36,29 @@ public class FlowerTest {
 
     @Test
     public void testPrice() {
-    double expectedPrice = 10.0;
-    flower.setPrice(expectedPrice);
-    Assertions.assertEquals(expectedPrice, flower.getPrice());
+        flower.setPrice(VALID_PRICE);
+        Assertions.assertEquals(VALID_PRICE, flower.getPrice());
     }
 
     @Test
     public void testFlowerType() {
-    FlowerType expectedType = FlowerType.ROSE;
-    flower.setFlowerType(expectedType);
-    Assertions.assertEquals(expectedType, flower.getFlowerType());
+        FlowerType expectedType = FlowerType.ROSE;
+        flower.setFlowerType(expectedType);
+        Assertions.assertEquals(expectedType, flower.getFlowerType());
     }
 
     @Test
     public void testInvalidPrice() {
-    Assertions.assertThrows(IllegalArgumentException.class, () -> {
-        flower.setPrice(-5.0);});
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            flower.setPrice(INVALID_PRICE);
+        });
     }
 
     @Test
     public void testInvalidQuantity() {
-    FlowerPack pack = new FlowerPack(flower, -1);
-    Assertions.assertThrows(IllegalArgumentException.class, () -> {
-        pack.setQuantity(-1);});
+        FlowerPack pack = new FlowerPack(flower, INVALID_QUANTITY);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            pack.setQuantity(INVALID_QUANTITY);
+        });
     }
 }
